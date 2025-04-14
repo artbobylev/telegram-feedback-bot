@@ -1,3 +1,9 @@
+Форк [yshalsager/telegram-feedback-bot](https://github.com/yshalsager/telegram-feedback-bot) c единственным добавлением – keyboard кнопки, открывающей интернет-магазин в mini app. 
+
+Задумывался для поддержки интернет-магазинов с возможностью выбора и обсуждения товара прямо в телеграм.
+
+---
+
 # Telegram Feedback Bot
 
 A livegram Telegram bot clone with topics support.
