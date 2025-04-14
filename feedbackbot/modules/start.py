@@ -5,6 +5,9 @@ from os import getenv
 from telegram import Update
 from telegram.ext import ContextTypes
 from telegram.helpers import escape_markdown
+from telegram import KeyboardButton, ReplyKeyboardMarkup
+from telegram import WebAppInfo
+
 
 from feedbackbot.utils.analytics import add_new_chat_to_db
 from feedbackbot.utils.telegram import get_reply_to_message_id
@@ -12,6 +15,8 @@ from feedbackbot.utils.telegram_handlers import (
     command_handler,
     tg_exceptions_handler,
 )
+from feedbackbot import SITE_URL
+
 
 logger = logging.getLogger(__name__)
 
@@ -32,4 +37,20 @@ async def start_handler(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
     await update.effective_message.reply_html(
         message_text or get_default_message_text(chat_title),
         reply_to_message_id=get_reply_to_message_id(update),
+    )
+
+@command_handler("shop")
+@tg_exceptions_handler
+async def shop_handler(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
+    assert update.effective_message is not None
+    text_message="Нажмите, чтобы перейти в магазин: 👇"
+    keyboard = [
+        [KeyboardButton(text="Открыть магазин", web_app=WebAppInfo(url=SITE_URL + "/?frombot=1"))]
+    ]
+   
+    reply_markup = ReplyKeyboardMarkup(keyboard)
+
+    await update.effective_message.reply_text(
+        text=text_message,
+        reply_markup=reply_markup
     )
