@@ -22,6 +22,8 @@ WORK_DIR = Path(__package__)
 PARENT_DIR = WORK_DIR.parent
 DB_PATH = PARENT_DIR / "feedback_bot.db"
 
+SITE_URL = getenv("SITE_URL", "")
+
 # bot config
 IS_DEBUG: bool = getenv("DEBUG", "").lower() in ("true", "1")
 BOT_TOKEN = getenv("TELEGRAM_BOT_TOKEN")
